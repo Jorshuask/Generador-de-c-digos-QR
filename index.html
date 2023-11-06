@@ -10,12 +10,15 @@
         body {
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         #border {
             border: 1px outset #333;
             padding: 10px;
             width: 80%;
+            max-width: 600px;
             margin: 0 auto;
             background-color: #fff;
             border-radius: 10px;
@@ -41,21 +44,23 @@
         #form {
             margin-top: 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
         #link {
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             height: 30px;
-            margin-right: 10px;
+            margin-bottom: 10px;
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
 
         button {
-            width: 100px;
+            width: 100%;
+            max-width: 200px;
             height: 40px;
             background-color: #8a2be2;
             color: white;
@@ -81,7 +86,8 @@
         }
 
         #boton2 {
-            width: 140px;
+            width: 100%;
+            max-width: 140px;
             height: 40px;
             background-color: #8a2be2;
             color: white;
@@ -99,13 +105,18 @@
             background-color: #6a3286;
         }
 
+        @media (max-width: 768px) {
+            #border {
+                width: 90%;
+            }
+        }
     </style>
    
 </head>
 <body>
     <div id="border">
         <div id="top">
-            <img id="logo" src="logo utp.jpg" alt="Logo UTP">
+            <img id="logo" src="logo_utp.jpg" alt="Logo UTP">
             <h1>Generador de QR</h1>
         </div>
         <div id="form">
@@ -136,7 +147,7 @@
                 descargar.href = canvas.toDataURL("image/png");
                 descargar.download = "codigoQR.png";
                 descargar.style.display = "block";
-                boton2.style.display = "inline-block";
+                boton2.style.display = "inline-flex";
             } else {
                 alert("Ingrese un link o URL para generar el código QR.");
             }
