@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de QR</title>
+    <link rel="icon" href="icon.png">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        #border {
+            border: 1px outset #333;
+            padding: 10px;
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #top {
+            background-color: #8a2be2;
+            padding: 15px;
+            color: aliceblue;
+            display: flex;
+            align-items: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        #form {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #link {
+            width: 400px;
+            height: 30px;
+            margin-right: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100px;
+            height: 40px;
+            background-color: #8a2be2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #6a3286;
+        }
+
+        .ContQR {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #cont2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #boton2 {
+            width: 140px;
+            height: 40px;
+            background-color: #8a2be2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        #boton2:hover {
+            background-color: #6a3286;
+        }
+
+    </style>
+   
+</head>
+<body>
+    <div id="border">
+        <div id="top">
+            <img id="logo" src="logo utp.jpg" alt="Logo UTP">
+            <h1>Generador de QR</h1>
+        </div>
+        <div id="form">
+            <input type="text" id="link" placeholder="Escribe aquí el link o URL">
+            <button onclick="Generar()">Generar</button>
+        </div>
+        <div id="Cont" class="ContQR"></div>
+        <div id="cont2">
+            <button id="boton2" style="display: none;">
+                <a id="descargar" style="color: aliceblue;">Descargar QR</a>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const cont = document.getElementById("Cont");
+        const QR = new QRCode(cont);
+        const link = document.getElementById("link");
+        const descargar = document.getElementById("descargar");
+        const boton2 = document.getElementById("boton2");
+
+        function Generar() {
+            if (link.value.trim() !== "") {
+                QR.makeCode(link.value);
+                link.value = "";
+                const canvas = document.querySelector("canvas");
+                descargar.href = canvas.toDataURL("image/png");
+                descargar.download = "codigoQR.png";
+                descargar.style.display = "block";
+                boton2.style.display = "inline-block";
+            } else {
+                alert("Ingrese un link o URL para generar el código QR.");
+            }
+        }
+    </script>
+</body>
+</html>
